@@ -95,6 +95,7 @@ async function loadOrder(orderNumber) {
         
         scannerSection.classList.add('hidden');
         orderSection.classList.remove('hidden');
+        photoSection.classList.remove('hidden');
     } catch (err) {
         showStatus(scannerStatus, `Error: ${err.message}`, 'error');
         startScannerBtn.style.display = 'block';
@@ -151,9 +152,6 @@ async function activateOrder() {
         
         currentOrder = await response.json();
         displayOrder(currentOrder);
-        
-        // Show photo section after activation
-        photoSection.classList.remove('hidden');
     } catch (err) {
         alert(`Error: ${err.message}`);
     }
