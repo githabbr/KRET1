@@ -16,7 +16,7 @@ This project consists of two main parts:
 - ✅ Activate orders
 - 📸 Take photos using camera
 - 🖼️ Upload images from gallery
-- 📤 Submit photos with activated orders
+- 📤 Submit photos with or without activating orders
 
 ### Backend API
 - RESTful API endpoints for order management
@@ -79,7 +79,7 @@ cd MobileWebSite
 4. Scan one of the pre-loaded order numbers:
    - `ORD12345` - Laptop Computer order
    - `ORD67890` - Wireless Mouse and Keyboard order
-5. Activate the order and upload photos
+5. Upload photos (with or without activating the order)
 
 **Note:** For barcode scanning to work, you'll need to:
 - Access the site over HTTPS (or localhost)
