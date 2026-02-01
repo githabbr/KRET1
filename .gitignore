@@ -10,7 +10,7 @@ obj/
 *.log
 
 ## Uploads
-wwwroot/uploads/
+OrderBackend/wwwroot/uploads/
 
 ## IDE
 .vs/

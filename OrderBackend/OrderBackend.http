@@ -1,6 +1,26 @@
-@OrderBackend_HostAddress = http://localhost:5077
+@OrderBackend_HostAddress = http://localhost:5000
 
-GET {{OrderBackend_HostAddress}}/weatherforecast/
+# Get all orders
+GET {{OrderBackend_HostAddress}}/api/orders
 Accept: application/json
+
+###
+
+# Get specific order
+GET {{OrderBackend_HostAddress}}/api/orders/ORD12345
+Accept: application/json
+
+###
+
+# Activate order
+POST {{OrderBackend_HostAddress}}/api/orders/ORD12345/activate
+Content-Type: application/json
+
+###
+
+# Upload photo (requires multipart/form-data - use a REST client like Postman for this)
+# POST {{OrderBackend_HostAddress}}/api/orders/ORD12345/photos
+# Content-Type: multipart/form-data
+# photo: [file]
 
 ###
