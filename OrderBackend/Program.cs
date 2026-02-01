@@ -35,6 +35,71 @@ var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uplo
 Directory.CreateDirectory(uploadsPath);
 app.UseStaticFiles();
 
+// Root info page
+app.MapGet("/", () =>
+{
+    return Results.Text($@"
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Scanner API</title>
+    <style>
+        body {{ font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }}
+        .container {{ max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }}
+        h1 {{ color: #333; }}
+        .endpoint {{ background: #f9f9f9; border-left: 4px solid #667eea; padding: 15px; margin: 15px 0; }}
+        .method {{ color: #48bb78; font-weight: bold; }}
+        code {{ background: #f0f0f0; padding: 2px 6px; border-radius: 3px; }}
+        a {{ color: #667eea; text-decoration: none; }}
+        a:hover {{ text-decoration: underline; }}
+        .links {{ margin-top: 30px; }}
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h1>📦 Order Scanner API</h1>
+        <p>Backend API for the Mobile Order Scanner application.</p>
+        
+        <h2>API Endpoints</h2>
+        
+        <div class='endpoint'>
+            <span class='method'>GET</span> <code>/api/orders</code>
+            <p>Get all orders</p>
+        </div>
+        
+        <div class='endpoint'>
+            <span class='method'>GET</span> <code>/api/orders/{{orderNumber}}</code>
+            <p>Get specific order details</p>
+        </div>
+        
+        <div class='endpoint'>
+            <span class='method'>POST</span> <code>/api/orders/{{orderNumber}}/activate</code>
+            <p>Activate an order</p>
+        </div>
+        
+        <div class='endpoint'>
+            <span class='method'>POST</span> <code>/api/orders/{{orderNumber}}/photos</code>
+            <p>Upload a photo for an order (multipart/form-data)</p>
+        </div>
+        
+        <div class='links'>
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href='/swagger/index.html'>📚 API Documentation (Swagger)</a></li>
+                <li><a href='/api/orders'>📋 View All Orders</a></li>
+            </ul>
+        </div>
+        
+        <hr>
+        <p><small>KRET1 - Mobile Order Scanner</small></p>
+    </div>
+</body>
+</html>
+", "text/html");
+})
+.WithName("InfoPage")
+.WithOpenApi();
+
 // Get all orders
 app.MapGet("/api/orders", (OrderService orderService) =>
 {

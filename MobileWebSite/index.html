@@ -14,11 +14,23 @@
         </header>
 
         <!-- Scanner Section -->
-        <div id="scanner-section" class="section">
+        <div id="scanner-section" class="section active">
             <h2>Scan Order Barcode</h2>
             <div id="reader" style="width: 100%;"></div>
             <div id="scanner-status" class="status-message"></div>
-            <button id="start-scanner-btn" class="btn btn-primary">Start Scanner</button>
+            
+            <div class="manual-entry-section">
+                <p class="manual-entry-label">Or enter manually:</p>
+                <div class="manual-entry-input">
+                    <input type="text" id="manual-code-input" placeholder="Enter barcode or QR code..." maxlength="100">
+                    <button id="manual-submit-btn" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="start-scanner-btn" class="btn btn-primary">Start Scanner</button>
+                <button id="skip-to-photos-btn" class="btn btn-secondary">Skip to Photos</button>
+            </div>
         </div>
 
         <!-- Order Details Section -->
@@ -31,6 +43,7 @@
             <div class="action-buttons">
                 <button id="activate-btn" class="btn btn-success">Activate Order</button>
                 <button id="new-scan-btn" class="btn btn-secondary">Scan Another Order</button>
+                <button id="home-btn-order" class="btn btn-secondary">🏠 Home</button>
             </div>
         </div>
 
@@ -61,6 +74,10 @@
             <div id="upload-status" class="status-message"></div>
             
             <button id="submit-btn" class="btn btn-success" style="display: none;">Submit Order</button>
+            
+            <div class="action-buttons" style="margin-top: 15px;">
+                <button id="home-btn-photo" class="btn btn-secondary">🏠 Home</button>
+            </div>
         </div>
     </div>
 

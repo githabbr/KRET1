@@ -28,7 +28,7 @@ This project consists of two main parts:
 ## Getting Started
 
 ### Prerequisites
-- .NET 8.0 SDK or later
+- .NET 10.0 SDK or later
 - A web server to serve the mobile web site (e.g., Python's http.server, Node.js http-server, or Live Server extension in VS Code)
 - A smartphone or device with camera for barcode scanning
 
@@ -45,6 +45,25 @@ dotnet run
 ```
 
 The backend will start on `http://localhost:5000` by default.
+
+**Running in VS Code:**
+
+1. Open the OrderBackend folder in VS Code:
+   - File > Open Folder > select `OrderBackend` folder
+   - Or drag the OrderBackend folder into VS Code
+
+2. Open the integrated terminal:
+   - Press `Ctrl + `` (backtick) or go to Terminal > New Terminal
+
+3. Run the command:
+```bash
+dotnet run
+```
+
+4. (Optional) For debugging:
+   - Install the C# Dev Kit extension (if not already installed)
+   - Press `F5` or go to Run > Start Debugging to run with the debugger attached
+   - Set breakpoints in Program.cs by clicking on the line number
 
 ### Running the Mobile Web Site
 
@@ -65,6 +84,20 @@ cd MobileWebSite
    npx http-server -p 8080
    ```
 
+   **Option 2b: Node.js with HTTPS** (required for camera access on network IPs)
+   
+   First, generate a self-signed certificate (one-time setup):
+   ```bash
+   openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.cert -days 365 -nodes
+   ```
+   
+   Then run http-server with HTTPS:
+   ```bash
+   npx http-server -p 8080 -S -C server.cert -K server.key
+   ```
+   
+   Access the site at: `https://<your-computer-ip>:8080` (note the HTTPS)
+
    **Option 3: VS Code Live Server extension**
    - Open the MobileWebSite folder in VS Code
    - Right-click on index.html and select "Open with Live Server"
@@ -74,17 +107,23 @@ cd MobileWebSite
 ### Testing the Application
 
 1. Make sure the backend is running on `http://localhost:5000`
-2. Open the mobile web site on your smartphone or device
+2. Open the mobile web site on your smartphone or device:
+   - On the same computer: `http://localhost:8080`
+   - From another device on the network: `http://<your-computer-ip>:8080`
 3. Click "Start Scanner" to activate the camera
 4. Scan one of the pre-loaded order numbers:
    - `ORD12345` - Laptop Computer order
    - `ORD67890` - Wireless Mouse and Keyboard order
 5. Upload photos (with or without activating the order)
 
-**Note:** For barcode scanning to work, you'll need to:
-- Access the site over HTTPS (or localhost)
-- Grant camera permissions when prompted
-- Generate a barcode/QR code for the order numbers (e.g., using an online QR code generator)
+**Camera Access Requirements:**
+
+For barcode scanning to work on mobile devices:
+- **On localhost/127.0.0.1**: Camera access is allowed over HTTP
+- **On other network IP addresses**: You'll need HTTPS (SSL certificate) for camera access
+- Always grant camera permissions when the browser prompts
+- If camera access fails, you can use the manual entry field to type the order number
+- Generate a barcode/QR code for the order numbers (e.g., using an online QR code generator) for testing
 
 ## API Endpoints
 
@@ -111,7 +150,7 @@ KRET1/
 ## Technologies Used
 
 ### Backend
-- ASP.NET Core 8.0
+- ASP.NET Core 10.0
 - Minimal APIs
 - In-memory data storage
 
